@@ -1,0 +1,18 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/G2USample/_2 Open This Scene/SampleAssets/Scripts/Database/Resources/SampleLocalization/SampleLocalization.cs">
+    <Files>
+      <File FileName="Assets/G2USample/_2 Open This Scene/SampleAssets/Scripts/Database/Resources/SampleDialogMap/SampleDialogMap.cs" Line="1" Column="1" />
+      <File FileName="Assets/G2USample/_2 Open This Scene/SampleAssets/Scripts/HUD/Hud.cs" Line="37" Column="51" />
+      <File FileName="Assets/G2USample/_2 Open This Scene/SampleAssets/Scripts/AI/AIManager.cs" Line="13" Column="21" />
+      <File FileName="Assets/G2USample/_2 Open This Scene/SampleAssets/Scripts/AI/BaseAIScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/G2USample/_2 Open This Scene/SampleAssets/Scripts/AI/RotateLeft.cs" Line="1" Column="1" />
+      <File FileName="Assets/G2USample/_2 Open This Scene/SampleAssets/Scripts/Database/Resources/SampleCharacters/SampleCharacters.cs" Line="1" Column="1" />
+      <File FileName="Assets/G2USample/_2 Open This Scene/SampleAssets/Scripts/Database/Resources/SampleLocalization/SampleLocalization.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

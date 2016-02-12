@@ -15,36 +15,12 @@ namespace Google2u
 	public class Sheet1Row : IGoogle2uRow
 	{
 		public string _Name;
-		public int _Yes;
-		public int _No;
-		public int _Maybe;
-		public Sheet1Row(string __GOOGLEFU_ID, string __Name, string __Yes, string __No, string __Maybe) 
+		public Sheet1Row(string __GOOGLEFU_ID, string __Name) 
 		{
 			_Name = __Name.Trim();
-			{
-			int res;
-				if(int.TryParse(__Yes, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
-					_Yes = res;
-				else
-					Debug.LogError("Failed To Convert _Yes string: "+ __Yes +" to int");
-			}
-			{
-			int res;
-				if(int.TryParse(__No, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
-					_No = res;
-				else
-					Debug.LogError("Failed To Convert _No string: "+ __No +" to int");
-			}
-			{
-			int res;
-				if(int.TryParse(__Maybe, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
-					_Maybe = res;
-				else
-					Debug.LogError("Failed To Convert _Maybe string: "+ __Maybe +" to int");
-			}
 		}
 
-		public int Length { get { return 4; } }
+		public int Length { get { return 1; } }
 
 		public string this[int i]
 		{
@@ -62,15 +38,6 @@ namespace Google2u
 				case 0:
 					ret = _Name.ToString();
 					break;
-				case 1:
-					ret = _Yes.ToString();
-					break;
-				case 2:
-					ret = _No.ToString();
-					break;
-				case 3:
-					ret = _Maybe.ToString();
-					break;
 			}
 
 			return ret;
@@ -84,15 +51,6 @@ namespace Google2u
 				case "_Name":
 					ret = _Name.ToString();
 					break;
-				case "_Yes":
-					ret = _Yes.ToString();
-					break;
-				case "_No":
-					ret = _No.ToString();
-					break;
-				case "_Maybe":
-					ret = _Maybe.ToString();
-					break;
 			}
 
 			return ret;
@@ -101,24 +59,21 @@ namespace Google2u
 		{
 			string ret = System.String.Empty;
 			ret += "{" + "_Name" + " : " + _Name.ToString() + "} ";
-			ret += "{" + "_Yes" + " : " + _Yes.ToString() + "} ";
-			ret += "{" + "_No" + " : " + _No.ToString() + "} ";
-			ret += "{" + "_Maybe" + " : " + _Maybe.ToString() + "} ";
 			return ret;
 		}
 	}
 	public class Sheet1 :  Google2uComponentBase, IGoogle2uDB
 	{
 		public enum rowIds {
-			ID_Q1, Q2
+			HYPE
 		};
 		public string [] rowNames = {
-			"ID_Q1", "Q2"
+			"HYPE"
 		};
 		public System.Collections.Generic.List<Sheet1Row> Rows = new System.Collections.Generic.List<Sheet1Row>();
 		public override void AddRowGeneric (System.Collections.Generic.List<string> input)
 		{
-			Rows.Add(new Sheet1Row(input[0],input[1],input[2],input[3],input[4]));
+			Rows.Add(new Sheet1Row(input[0],input[1]));
 		}
 		public override void Clear ()
 		{

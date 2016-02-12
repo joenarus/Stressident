@@ -50,27 +50,6 @@ namespace Google2u
 			}
 			EditorGUILayout.EndHorizontal();
 
-			EditorGUILayout.BeginHorizontal();
-			GUILayout.Label( "_Yes", GUILayout.Width( 150.0f ) );
-			{
-				EditorGUILayout.IntField( r._Yes );
-			}
-			EditorGUILayout.EndHorizontal();
-
-			EditorGUILayout.BeginHorizontal();
-			GUILayout.Label( "_No", GUILayout.Width( 150.0f ) );
-			{
-				EditorGUILayout.IntField( r._No );
-			}
-			EditorGUILayout.EndHorizontal();
-
-			EditorGUILayout.BeginHorizontal();
-			GUILayout.Label( "_Maybe", GUILayout.Width( 150.0f ) );
-			{
-				EditorGUILayout.IntField( r._Maybe );
-			}
-			EditorGUILayout.EndHorizontal();
-
 		}
 	}
 }

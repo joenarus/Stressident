@@ -21,14 +21,18 @@ public class GameView : MonoBehaviour
 				// If the user clicked a folder ...
 				if (hit.collider.gameObject.tag == "Folder") 
 				{
+					// Default question
 					string question = "Did you know that if you're seeing this question then something went wrong?";
 
-					if (folderClicked != null) 
-					{
-						question = folderClicked ();
-					}
+					// Get question from folderClicked event raised to game controller
+					question = folderClicked ();
 
-					Debug.Log (question);
+					// Get the GUI to assign the question to
+					DisplayQuestionScript dqs = this.gameObject.AddComponent<DisplayQuestionScript>();
+					// Assign the question
+					dqs.question = question;
+
+					// Remove the folder game object
 					Destroy (GameObject.Find (hit.collider.gameObject.name));
 				}
 			}

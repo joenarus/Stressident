@@ -57,6 +57,7 @@
      <Compile Include="Assets\G2USample\_2 Open This Scene\SampleAssets\Scripts\MessageBubble\SampleMessageBubble.cs" />
      <Compile Include="Assets\G2USample\_2 Open This Scene\SampleAssets\Scripts\Spawn\SampleSpawnPoint.cs" />
      <Compile Include="Assets\Google2uGen\ObjDB\Resources\Sheet1\Sheet1.cs" />
+     <Compile Include="Assets\Scripts\DisplayQuestionScript.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\GameView.cs" />
  <Reference Include="UnityEngine.UI">

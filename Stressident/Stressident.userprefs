@@ -1,9 +1,10 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Editor/ImageEffects/AntialiasingEditor.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameController.cs">
     <Files>
-      <File FileName="Assets/Standard Assets/Characters/FirstPersonCharacter/Scripts/FirstPersonController.cs" Line="32" Column="26" />
-      <File FileName="Assets/Editor/ImageEffects/AntialiasingEditor.cs" Line="7" Column="1" />
+      <File FileName="Assets/Scripts/GameController.cs" Line="30" Column="68" />
+      <File FileName="Assets/Scripts/GameView.cs" Line="1" Column="1" />
+      <File FileName="Assets/Google2uGen/ObjDB/Editor/Sheet1/Sheet1.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

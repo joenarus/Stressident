@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System.Xml;
+using System.IO;
 
 public class GameController : MonoBehaviour 
 {
@@ -11,7 +13,7 @@ public class GameController : MonoBehaviour
 	public GameObject QuestionCanvas;
 	public Slider approval;
 	private int currentQuestion;
-
+	private int pastAnswer;
 
 	void Start() {
 		if (db = null) {
@@ -88,6 +90,7 @@ public class GameController : MonoBehaviour
 			approval.value += j;
 		}
 
+		WriteToXml (x);
 		QuestionCanvas.SetActive (false);
 
 	}
@@ -98,7 +101,67 @@ public class GameController : MonoBehaviour
 		x = Random.Range (1, 11);
 		Google2u.QuestionsRow a = db1.Rows [PickRandomID(x)];
 		currentQuestion = x;
+		LoadFromXml ();
 		// Call the method in the game model that generates questions
 		return a[0];
 	}
+
+	public void WriteToXml(int answer)
+	{
+		
+		string filepath = Application.dataPath + @"/Data/questionsUsed.xml";
+		XmlDocument xmlDoc = new XmlDocument();
+		XmlElement elmRoot;
+		if (File.Exists (filepath)) {
+			xmlDoc.Load (filepath);
+			elmRoot = xmlDoc.DocumentElement;
+		
+			
+			//elmRoot.RemoveAll(); // remove all inside the transforms node.
+			
+			XmlElement elmNew = xmlDoc.CreateElement ("id"); // create the rotation node.
+			XmlElement answerX = xmlDoc.CreateElement ("answer");
+			elmNew.InnerText = currentQuestion.ToString ();
+			answerX.InnerText = answer.ToString ();
+
+			elmNew.AppendChild (answerX);
+			elmRoot.AppendChild (elmNew); // make the transform node the parent.
+			
+			xmlDoc.Save (filepath); // save file.
+		}
+
+	}
+
+	public void LoadFromXml()
+	{
+		string filepath = Application.dataPath + @"/Data/questionsUsed.xml";
+		XmlDocument xmlDoc = new XmlDocument();
+		
+		if(File.Exists (filepath))
+		{
+			xmlDoc.Load(filepath);
+			
+			XmlNodeList transformList = xmlDoc.GetElementsByTagName("id");
+			
+			foreach (XmlNode transformInfo in transformList)
+			{
+				XmlNodeList transformcontent = transformInfo.ChildNodes;
+				
+				foreach (XmlNode transformItens in transformcontent)
+				{
+					if(transformItens.Name == "answer")
+					{
+						pastAnswer = int.Parse(transformItens.InnerText); // convert the strings to float and apply to the X variable.
+						Debug.Log("Past answer: " + pastAnswer);
+					}
+
+					
+				}
+			}
+		}
+		 // Apply the values to the cube object.
+		
+	}
+
+
 }

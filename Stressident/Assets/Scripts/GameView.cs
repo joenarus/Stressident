@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.FirstPerson;
+
 public class GameView : MonoBehaviour 
 {
 	// The folder clicked event fires an alert to the game controller
@@ -29,22 +31,8 @@ public class GameView : MonoBehaviour
 					question = folderClicked ();
 
 					// Get the GUI to assign the question to
-
-
 					QuestionCanvas.SetActive(true);
-
 					QuestionCanvas.GetComponentInChildren<Text>().text = question;
-
-
-
-
-					//DisplayQuestionScript dqs = this.gameObject.AddComponent<DisplayQuestionScript>();
-
-
-
-
-					// Assign the question
-					//dqs.question = question;
 
 					// Remove the folder game object
 					//Destroy (GameObject.Find (hit.collider.gameObject.name));

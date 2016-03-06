@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Xml;
 using System.IO;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class GameController : MonoBehaviour 
 {
@@ -23,6 +24,7 @@ public class GameController : MonoBehaviour
 			
 		}
 	}
+
 	// The game controller subscribes to these events from other classes
 	void OnEnable()
 	{	
@@ -69,7 +71,11 @@ public class GameController : MonoBehaviour
 
 	}
 
-	public void AnswerQuestion(int x) {
+	public void AnswerQuestion(int x) 
+	{
+		// Enable FPS controller once question is answered
+		enableFPSCamera();
+
 		Google2u.QuestionsRow a = db1.Rows [PickRandomID(currentQuestion)]; //pulls current values for question
 		Debug.Log (a._No);
 
@@ -97,12 +103,14 @@ public class GameController : MonoBehaviour
 
 	string GetQuestion()
 	{
+		// Disable FPS controller while question GUI is up
+		disableFPSCamera();
+
 		int x;
 		x = Random.Range (1, 11);
 		Google2u.QuestionsRow a = db1.Rows [PickRandomID(x)];
 		currentQuestion = x;
 		LoadFromXml ();
-		// Call the method in the game model that generates questions
 		return a[0];
 	}
 
@@ -162,6 +170,14 @@ public class GameController : MonoBehaviour
 		 // Apply the values to the cube object.
 		
 	}
+		
+	void enableFPSCamera()
+	{
+		GameObject.Find ("FPSController").GetComponent<FirstPersonController> ().enabled = true;	
+	}
 
-
+	void disableFPSCamera()
+	{
+		GameObject.Find ("FPSController").GetComponent<FirstPersonController> ().enabled = false;	
+	}
 }

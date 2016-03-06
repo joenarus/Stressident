@@ -13,16 +13,22 @@ public class GameController : MonoBehaviour
 	public Google2u.Questions db1;
 	public GameObject QuestionCanvas;
 	public Slider approval;
+	public delegate void QuestionUp();
+	public static event QuestionUp questionUp;
+	public delegate void QuestionDown();
+	public static event QuestionDown questionDown;
 	private int currentQuestion;
 	private int pastAnswer;
+	private GameView gameView;
 
 	void Start() {
 		if (db = null) {
 			db = GameObject.Find ("Google2uDatabase");
 	
 			db1 = db.GetComponent<Google2u.Questions>();
-			
 		}
+
+		gameView = GetComponent<GameView>();
 	}
 
 	// The game controller subscribes to these events from other classes
@@ -75,6 +81,8 @@ public class GameController : MonoBehaviour
 	{
 		// Enable FPS controller once question is answered
 		enableFPSCamera();
+		questionDown();
+		gameView.questionUp = false;
 
 		Google2u.QuestionsRow a = db1.Rows [PickRandomID(currentQuestion)]; //pulls current values for question
 		Debug.Log (a._No);
@@ -105,6 +113,8 @@ public class GameController : MonoBehaviour
 	{
 		// Disable FPS controller while question GUI is up
 		disableFPSCamera();
+		questionUp();
+		gameView.questionUp = true;
 
 		int x;
 		x = Random.Range (1, 11);

@@ -44,15 +44,22 @@ public class GameController : MonoBehaviour
 
 	void Update()
 	{
+		gameView.mousePosition = new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y);
+
 		if (!gameView.questionUp) 
 		{
 			Cursor.lockState = CursorLockMode.Locked;
-			Cursor.visible = true;
 		} 
 		else 
 		{
 			Cursor.lockState = CursorLockMode.None;
 			Cursor.visible = true;
+		}
+
+		if (Input.GetKeyDown (KeyCode.Escape)) 
+		{
+			Cursor.visible = true;
+			gameView.hitEscape = true;
 		}
 	}
 

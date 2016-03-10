@@ -10,6 +10,11 @@ public class GameView : MonoBehaviour
 	public static event FolderClicked folderClicked;
 	public GameObject QuestionCanvas;
 	public bool questionUp = false;
+	public Vector2 mousePosition;
+	private int w = 32;
+	private int h = 32;
+	public Texture2D cursor;
+	public bool hitEscape = false;
 
 	void Update () 
 	{
@@ -41,6 +46,14 @@ public class GameView : MonoBehaviour
 					}
 				}
 			}
+		}
+	}	
+
+	void OnGUI()
+	{
+		if (!questionUp && !hitEscape) 
+		{
+			GUI.DrawTexture (new Rect (mousePosition.x - (w / 2), mousePosition.y - (h / 2), w, h), cursor);
 		}
 	}
 }

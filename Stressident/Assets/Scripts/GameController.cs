@@ -21,14 +21,49 @@ public class GameController : MonoBehaviour
 	private int pastAnswer;
 	private GameView gameView;
 
+	double lastChange = 0.0;
+	int hour = 8;
+	int minutes = 0;
+	string ampm = "am";
+
+
+	Dictionary<int, Dictionary<string,List<int>>> questions; //will hold past information
+	Dictionary<int, int> answers;
+
+
 	void Start() {
 		if (db = null) {
 			db = GameObject.Find ("Google2uDatabase");
 	
 			db1 = db.GetComponent<Google2u.Questions>();
 		}
-
+		questions = new Dictionary<int, Dictionary<string,List<int>>>();
+		answers = new Dictionary<int, int>();
 		gameView = GetComponent<GameView>();
+
+		for(int i = 0; i < 30; i++) {
+			List<int> ansVals = new List<int>();
+			Dictionary<string, List<int>> temp = new Dictionary<string, List<int>>();
+			Google2u.QuestionsRow a = db1.Rows [i];
+			for(int j = 0; j < 3; j++) {
+				int s = 0;
+				if(j == 0)
+					s = a._Yes;
+				else if (j == 1)
+					s = a._No;
+				else
+					s = a._Maybe;
+
+				ansVals.Add(s);
+			}
+			temp.Add(a._Name, ansVals);
+			questions.Add(i,temp);
+		}
+
+	}
+
+	void OnGUI () {
+		GUILayout.Label(hour.ToString() + ":" + minutes.ToString() + "0" + ampm);
 	}
 
 	// The game controller subscribes to these events from other classes
@@ -61,42 +96,60 @@ public class GameController : MonoBehaviour
 			Cursor.visible = true;
 			gameView.hitEscape = true;
 		}
+
+		if (Time.time - lastChange > 5.0) {
+			minutes++;
+			if(minutes == 6) {
+				minutes = 0;
+				hour++;
+				if(hour == 12) {
+					if(ampm == "am")
+						ampm = "pm";
+				}
+				if (hour == 24) {
+					hour = 8;
+					if(ampm == "pm")
+						ampm = "am";
+				}
+			}
+			lastChange = Time.time;
+		}
 	}
-
-	int PickRandomID(int x) {
-		if (x == 1) {
-			return (int)Google2u.Questions.rowIds.ID_Q1;
-		}
-
-		else if (x == 2) {
-			return (int)Google2u.Questions.rowIds.ID_Q2;
-		}
-		else if (x == 3) {
-			return (int)Google2u.Questions.rowIds.ID_Q3;
-		}
-		else if (x == 4) {
-			return (int)Google2u.Questions.rowIds.ID_Q4;
-		}
-		else if (x == 5) {
-			return (int)Google2u.Questions.rowIds.ID_Q5;
-		}
-		else if (x == 6) {
-			return (int)Google2u.Questions.rowIds.ID_Q6;
-		}
-		else if (x == 7) {
-			return (int)Google2u.Questions.rowIds.ID_Q7;
-		}
-		else if (x == 8) {
-			return (int)Google2u.Questions.rowIds.ID_Q8;
-		}
-		else if (x == 9) {
-			return (int)Google2u.Questions.rowIds.ID_Q9;
-		}
-		else {
-			return (int)Google2u.Questions.rowIds.ID_Q10;
-		}
-
-	}
+//
+//	int PickRandomID(int x) {
+//		if (x == 1) {
+//			return (int)Google2u.Questions.rowIds.ID_Q1;
+//		}
+//
+//		else if (x == 2) {
+//			return (int)Google2u.Questions.rowIds.ID_Q2;
+//		}
+//		else if (x == 3) {
+//			return (int)Google2u.Questions.rowIds.ID_Q3;
+//		}
+//		else if (x == 4) {
+//			return (int)Google2u.Questions.rowIds.ID_Q4;
+//		}
+//		else if (x == 5) {
+//			return (int)Google2u.Questions.rowIds.ID_Q5;
+//		}
+//		else if (x == 6) {
+//			return (int)Google2u.Questions.rowIds.ID_Q6;
+//		}
+//		else if (x == 7) {
+//			return (int)Google2u.Questions.rowIds.ID_Q7;
+//		}
+//		else if (x == 8) {
+//			return (int)Google2u.Questions.rowIds.ID_Q8;
+//		}
+//		else if (x == 9) {
+//			return (int)Google2u.Questions.rowIds.ID_Q9;
+//		}
+//		else {
+//			return (int)Google2u.Questions.rowIds.ID_Q10;
+//		}
+//
+//	}
 
 	public void AnswerQuestion(int x) 
 	{
@@ -105,12 +158,18 @@ public class GameController : MonoBehaviour
 		questionDown();
 		gameView.questionUp = false;
 
-		Google2u.QuestionsRow a = db1.Rows [PickRandomID(currentQuestion)]; //pulls current values for question
-		Debug.Log (a._No);
+		//Google2u.QuestionsRow a = db1.Rows [PickRandomID(currentQuestion)]; //pulls current values for question
+		Dictionary<string,List<int>> ansV;
+		questions.TryGetValue (currentQuestion, out ansV);
+		List<int> currentVals = new List<int>();
+		foreach(string key in ansV.Keys) {
+			ansV.TryGetValue(key, out currentVals);
+		}
 
-		int i = a._Yes;
-		int j = a._No;
-		int k = a._Maybe;
+		int i = currentVals[0];
+		int j = currentVals[1];
+		int k = currentVals[2];
+
 
 		//yes
 		if (x == 1) {
@@ -125,7 +184,7 @@ public class GameController : MonoBehaviour
 			approval.value += j;
 		}
 
-		WriteToXml (x);
+		answers.Add (currentQuestion, x); 
 		QuestionCanvas.SetActive (false);
 
 	}
@@ -138,11 +197,19 @@ public class GameController : MonoBehaviour
 		gameView.questionUp = true;
 
 		int x;
-		x = Random.Range (1, 11);
-		Google2u.QuestionsRow a = db1.Rows [PickRandomID(x)];
+		x = Random.Range (1, 31);
+		string q = "";
+
+		Dictionary<string, List<int>> t;
+		questions.TryGetValue(x, out t);
+		foreach(string Key in t.Keys) {
+			q = Key;
+		}
+		
+		//Google2u.QuestionsRow a = db1.Rows [PickRandomID(x)];
 		currentQuestion = x;
-		LoadFromXml ();
-		return a[0];
+		//LoadFromXml ();
+		return q;
 	}
 
 	public void WriteToXml(int answer)
@@ -198,7 +265,6 @@ public class GameController : MonoBehaviour
 				}
 			}
 		}
-		 // Apply the values to the cube object.
 		
 	}
 		

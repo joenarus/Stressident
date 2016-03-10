@@ -71,6 +71,13 @@ namespace Google2u
 			}
 			EditorGUILayout.EndHorizontal();
 
+			EditorGUILayout.BeginHorizontal();
+			GUILayout.Label( "_Type", GUILayout.Width( 150.0f ) );
+			{
+				EditorGUILayout.TextField( r._Type );
+			}
+			EditorGUILayout.EndHorizontal();
+
 		}
 	}
 }

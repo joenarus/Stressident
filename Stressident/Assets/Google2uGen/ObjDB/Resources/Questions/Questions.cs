@@ -18,7 +18,8 @@ namespace Google2u
 		public int _Yes;
 		public int _No;
 		public int _Maybe;
-		public QuestionsRow(string __GOOGLEFU_ID, string __Name, string __Yes, string __No, string __Maybe) 
+		public string _Type;
+		public QuestionsRow(string __GOOGLEFU_ID, string __Name, string __Yes, string __No, string __Maybe, string __Type) 
 		{
 			_Name = __Name.Trim();
 			{
@@ -42,9 +43,10 @@ namespace Google2u
 				else
 					Debug.LogError("Failed To Convert _Maybe string: "+ __Maybe +" to int");
 			}
+			_Type = __Type.Trim();
 		}
 
-		public int Length { get { return 4; } }
+		public int Length { get { return 5; } }
 
 		public string this[int i]
 		{
@@ -71,6 +73,9 @@ namespace Google2u
 				case 3:
 					ret = _Maybe.ToString();
 					break;
+				case 4:
+					ret = _Type.ToString();
+					break;
 			}
 
 			return ret;
@@ -93,6 +98,9 @@ namespace Google2u
 				case "_Maybe":
 					ret = _Maybe.ToString();
 					break;
+				case "_Type":
+					ret = _Type.ToString();
+					break;
 			}
 
 			return ret;
@@ -104,21 +112,24 @@ namespace Google2u
 			ret += "{" + "_Yes" + " : " + _Yes.ToString() + "} ";
 			ret += "{" + "_No" + " : " + _No.ToString() + "} ";
 			ret += "{" + "_Maybe" + " : " + _Maybe.ToString() + "} ";
+			ret += "{" + "_Type" + " : " + _Type.ToString() + "} ";
 			return ret;
 		}
 	}
 	public class Questions :  Google2uComponentBase, IGoogle2uDB
 	{
 		public enum rowIds {
-			ID_Q1, ID_Q2, ID_Q3, ID_Q4, ID_Q5, ID_Q6, ID_Q7, ID_Q8, ID_Q9, ID_Q10
+			ID_Q1, ID_Q2, ID_Q3, ID_Q4, ID_Q5, ID_Q6, ID_Q7, ID_Q8, ID_Q9, ID_Q10, ID_Q11, ID_Q12, ID_Q13, ID_Q14, ID_Q15, ID_Q16, ID_Q17, ID_Q18
+			, ID_Q19, ID_Q20, ID_Q21, ID_Q22, ID_Q23, ID_Q24, ID_Q25, ID_Q26, ID_Q27, ID_Q28, ID_Q29, ID_Q30
 		};
 		public string [] rowNames = {
-			"ID_Q1", "ID_Q2", "ID_Q3", "ID_Q4", "ID_Q5", "ID_Q6", "ID_Q7", "ID_Q8", "ID_Q9", "ID_Q10"
+			"ID_Q1", "ID_Q2", "ID_Q3", "ID_Q4", "ID_Q5", "ID_Q6", "ID_Q7", "ID_Q8", "ID_Q9", "ID_Q10", "ID_Q11", "ID_Q12", "ID_Q13", "ID_Q14", "ID_Q15", "ID_Q16", "ID_Q17", "ID_Q18"
+			, "ID_Q19", "ID_Q20", "ID_Q21", "ID_Q22", "ID_Q23", "ID_Q24", "ID_Q25", "ID_Q26", "ID_Q27", "ID_Q28", "ID_Q29", "ID_Q30"
 		};
 		public System.Collections.Generic.List<QuestionsRow> Rows = new System.Collections.Generic.List<QuestionsRow>();
 		public override void AddRowGeneric (System.Collections.Generic.List<string> input)
 		{
-			Rows.Add(new QuestionsRow(input[0],input[1],input[2],input[3],input[4]));
+			Rows.Add(new QuestionsRow(input[0],input[1],input[2],input[3],input[4],input[5]));
 		}
 		public override void Clear ()
 		{

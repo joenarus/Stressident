@@ -42,6 +42,20 @@ public class GameController : MonoBehaviour
 		GameView.folderClicked -= GetQuestion;
 	}
 
+	void Update()
+	{
+		if (!gameView.questionUp) 
+		{
+			Cursor.lockState = CursorLockMode.Locked;
+			Cursor.visible = true;
+		} 
+		else 
+		{
+			Cursor.lockState = CursorLockMode.None;
+			Cursor.visible = true;
+		}
+	}
+
 	int PickRandomID(int x) {
 		if (x == 1) {
 			return (int)Google2u.Questions.rowIds.ID_Q1;

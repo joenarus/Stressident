@@ -115,41 +115,6 @@ public class GameController : MonoBehaviour
 			lastChange = Time.time;
 		}
 	}
-//
-//	int PickRandomID(int x) {
-//		if (x == 1) {
-//			return (int)Google2u.Questions.rowIds.ID_Q1;
-//		}
-//
-//		else if (x == 2) {
-//			return (int)Google2u.Questions.rowIds.ID_Q2;
-//		}
-//		else if (x == 3) {
-//			return (int)Google2u.Questions.rowIds.ID_Q3;
-//		}
-//		else if (x == 4) {
-//			return (int)Google2u.Questions.rowIds.ID_Q4;
-//		}
-//		else if (x == 5) {
-//			return (int)Google2u.Questions.rowIds.ID_Q5;
-//		}
-//		else if (x == 6) {
-//			return (int)Google2u.Questions.rowIds.ID_Q6;
-//		}
-//		else if (x == 7) {
-//			return (int)Google2u.Questions.rowIds.ID_Q7;
-//		}
-//		else if (x == 8) {
-//			return (int)Google2u.Questions.rowIds.ID_Q8;
-//		}
-//		else if (x == 9) {
-//			return (int)Google2u.Questions.rowIds.ID_Q9;
-//		}
-//		else {
-//			return (int)Google2u.Questions.rowIds.ID_Q10;
-//		}
-//
-//	}
 
 	public void AnswerQuestion(int x) 
 	{

@@ -1,36 +1,27 @@
 fileFormatVersion: 2
-guid: b476937b5c5bd3142b854d0ec8d989a3
-timeCreated: 1457497812
+guid: 6bc946f45b84eff459061f9fa221412e
+timeCreated: 1457581543
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: dynamicConstraint1
-    100002: //RootNode
-    100004: gravityField1
-    100006: nCloth1
-    100008: nucleus1
-    100010: pCube1
-    100012: pCylinder1
-    100014: pPlane1
-    400000: dynamicConstraint1
-    400002: //RootNode
-    400004: gravityField1
-    400006: nCloth1
-    400008: nucleus1
-    400010: pCube1
-    400012: pCylinder1
-    400014: pPlane1
+    100000: //RootNode
+    100002: pCube1
+    100004: pCylinder1
+    100006: pPlane1
+    400000: //RootNode
+    400002: pCube1
+    400004: pCylinder1
+    400006: pPlane1
     2300000: pCube1
     2300002: pCylinder1
     2300004: pPlane1
     3300000: pCube1
     3300002: pCylinder1
     3300004: pPlane1
-    4300000: pCylinder1
-    4300002: pCube1
+    4300000: pCube1
+    4300002: pCylinder1
     4300004: pPlane1
-    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -89,7 +80,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

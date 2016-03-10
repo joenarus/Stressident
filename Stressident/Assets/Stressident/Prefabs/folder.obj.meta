@@ -1,28 +1,17 @@
 fileFormatVersion: 2
-guid: ae171e195ab4d6846a6775f3dbb69f5d
-timeCreated: 1457063328
+guid: 1d8fed3ee78acb24694e69279d65491a
+timeCreated: 1457581298
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
-    100002: group
-    100004: pasted__pPlane1
-    100006: pasted__pPlane1 1
-    100008: pPlane1
-    100010: transform1
-    100012: transform2
+    100002: pasted__pPlane1
     400000: //RootNode
-    400002: group
-    400004: pasted__pPlane1
-    400006: pasted__pPlane1 1
-    400008: pPlane1
-    400010: transform1
-    400012: transform2
+    400002: pasted__pPlane1
     2300000: pasted__pPlane1
     3300000: pasted__pPlane1
     4300000: pasted__pPlane1
-    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -81,7 +70,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

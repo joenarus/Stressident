@@ -14,7 +14,7 @@ public class NewGameCont : MonoBehaviour {
 	}
 
 	public void NewGame() {
-		Application.LoadLevel (1);
+		Application.LoadLevel (2);
 
 	}
 }

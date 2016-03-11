@@ -17,4 +17,9 @@ public class TutorialController : MonoBehaviour {
 	void Update () {
 	
 	}
+
+	public void GOGOGO() {
+
+		Application.LoadLevel (1);
+	}
 }

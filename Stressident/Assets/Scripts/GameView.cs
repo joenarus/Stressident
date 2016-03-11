@@ -53,7 +53,7 @@ public class GameView : MonoBehaviour
 	{
 		if (!questionUp && !hitEscape) 
 		{
-			GUI.DrawTexture (new Rect (mousePosition.x - (w / 2), mousePosition.y - (h / 2), w, h), cursor);
+			GUI.DrawTexture (new Rect (mousePosition.x - (w / 2), mousePosition.y - (h / 2) - 32, w, h), cursor);
 		}
 	}
 }

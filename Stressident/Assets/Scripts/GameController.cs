@@ -32,6 +32,8 @@ public class GameController : MonoBehaviour
 
 
 	void Start() {
+
+
 		if (db = null) {
 			db = GameObject.Find ("Google2uDatabase");
 	
@@ -79,11 +81,14 @@ public class GameController : MonoBehaviour
 
 	void Update()
 	{
-		gameView.mousePosition = new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y);
+		gameView.mousePosition = new Vector2(Screen.width/2, Screen.height/2);
+		Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.None;
 
 		if (!gameView.questionUp) 
 		{
 			Cursor.lockState = CursorLockMode.Locked;
+
 		} 
 		else 
 		{

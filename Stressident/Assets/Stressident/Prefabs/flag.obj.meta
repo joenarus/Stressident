@@ -1,27 +1,17 @@
 fileFormatVersion: 2
 guid: 6bc946f45b84eff459061f9fa221412e
-timeCreated: 1457581543
+timeCreated: 1457997125
 licenseType: Free
 ModelImporter:
-  serializedVersion: 19
+  serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
-    100002: pCube1
-    100004: pCylinder1
-    100006: pPlane1
+    100002: pCylinder2
     400000: //RootNode
-    400002: pCube1
-    400004: pCylinder1
-    400006: pPlane1
-    2300000: pCube1
-    2300002: pCylinder1
-    2300004: pPlane1
-    3300000: pCube1
-    3300002: pCylinder1
-    3300004: pPlane1
-    4300000: pCube1
-    4300002: pCylinder1
-    4300004: pPlane1
+    400002: pCylinder2
+    2300000: pCylinder2
+    3300000: pCylinder2
+    4300000: pCylinder2
   materials:
     importMaterials: 1
     materialName: 0
@@ -29,7 +19,6 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleRotations: 1
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 
@@ -37,9 +26,9 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     animationCompression: 1
-    animationRotationError: 0.5
-    animationPositionError: 0.5
-    animationScaleError: 0.5
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
     clipAnimations: []
@@ -63,25 +52,24 @@ ModelImporter:
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
     normalImportMode: 0
-    tangentImportMode: 3
+    tangentImportMode: 1
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
     human: []
     skeleton: []
-    armTwist: 0.5
-    foreArmTwist: 0.5
-    upperLegTwist: 0.5
-    legTwist: 0.5
-    armStretch: 0.05
-    legStretch: 0.05
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
     feetSpacing: 0
     rootMotionBoneName: 
-    hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 0
-  humanoidOversampling: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System.Xml;
 using System.IO;
 using UnityStandardAssets.Characters.FirstPerson;
+using System.Linq;
 
 public class GameController : MonoBehaviour 
 {
@@ -17,9 +18,15 @@ public class GameController : MonoBehaviour
 	public static event QuestionUp questionUp;
 	public delegate void QuestionDown();
 	public static event QuestionDown questionDown;
-	private int currentQuestion;
+	private Question currentQuestion;
 	private int pastAnswer;
 	private GameView gameView;
+
+	public GameObject folder1;
+	public GameObject folder2;
+	public GameObject folder3;
+	
+	public int tempDebug = 0;
 
 	double lastChange = 0.0;
 	int hour = 8;
@@ -27,41 +34,44 @@ public class GameController : MonoBehaviour
 	string ampm = "am";
 
 
-	Dictionary<int, Dictionary<string,List<int>>> questions; //will hold past information
-	Dictionary<int, int> answers;
-
+	Dictionary<string, List<Question>> questions; 
+	List<string> topics;
 
 	void Start() {
-
-
+		folderTopics ();
+		List<string> topics = new List<string>();
 		if (db = null) {
 			db = GameObject.Find ("Google2uDatabase");
-	
 			db1 = db.GetComponent<Google2u.Questions>();
 		}
-		questions = new Dictionary<int, Dictionary<string,List<int>>>();
-		answers = new Dictionary<int, int>();
+
+		questions = new Dictionary<string, List<Question>>();
 		gameView = GetComponent<GameView>();
 
+		//Places questions into their respective topics.
 		for(int i = 0; i < 30; i++) {
-			List<int> ansVals = new List<int>();
-			Dictionary<string, List<int>> temp = new Dictionary<string, List<int>>();
+
+			List<Question> y;
 			Google2u.QuestionsRow a = db1.Rows [i];
-			for(int j = 0; j < 3; j++) {
-				int s = 0;
-				if(j == 0)
-					s = a._Yes;
-				else if (j == 1)
-					s = a._No;
-				else
-					s = a._Maybe;
 
-				ansVals.Add(s);
+			questions.TryGetValue(a._Type, out y);
+			
+			if(y == null) {
+				y = new List<Question>();
 			}
-			temp.Add(a._Name, ansVals);
-			questions.Add(i,temp);
-		}
+			HashSet<string> temptopics = new HashSet<string>();
+			Question temporary = new Question(a._Name, a._Type, a._Yes, a._No, a._Maybe);
+			y.Add(temporary);
 
+			temptopics.Add(temporary.topic); //adding to List for future iteration.
+			topics = temptopics.ToList();
+
+
+			if(questions.ContainsKey(temporary.topic)) {
+				questions.Remove(temporary.topic);
+			}
+			questions.Add(temporary.topic, y);
+		}
 	}
 
 	void OnGUI () {
@@ -128,33 +138,30 @@ public class GameController : MonoBehaviour
 		questionDown();
 		gameView.questionUp = false;
 
-		//Google2u.QuestionsRow a = db1.Rows [PickRandomID(currentQuestion)]; //pulls current values for question
-		Dictionary<string,List<int>> ansV;
-		questions.TryGetValue (currentQuestion, out ansV);
-		List<int> currentVals = new List<int>();
-		foreach(string key in ansV.Keys) {
-			ansV.TryGetValue(key, out currentVals);
-		}
-
-		int i = currentVals[0];
-		int j = currentVals[1];
-		int k = currentVals[2];
-
+		int i = currentQuestion.Yes;
+		int j = currentQuestion.No;
+		int k = currentQuestion.Hold;
 
 		//yes
 		if (x == 1) {
 			approval.value += i;
+			currentQuestion.Answered = true;
 		}
-		//maybe
+		//hold
 		else if (x == 2) {
 			approval.value += k;
+
 		}
 		//no
 		else {
 			approval.value += j;
+			currentQuestion.Answered = true;
 		}
 
-		answers.Add (currentQuestion, x); 
+		currentQuestion.AnsweredValue = x;
+
+		Debug.Log (questions [currentQuestion.topic] [tempDebug].Answered);
+
 		QuestionCanvas.SetActive (false);
 
 	}
@@ -166,22 +173,38 @@ public class GameController : MonoBehaviour
 		questionUp();
 		gameView.questionUp = true;
 
-		int x;
-		x = Random.Range (1, 31);
+		List<Question> possibilities;
+		questions.TryGetValue (gameView.currentTopic, out possibilities);
+
+		int x = 0;
+		bool allAnswered = false;
+		int counter = 0;
+		for(int i = 0; i < possibilities.Count; i++) {
+			x = Random.Range (0, possibilities.Count);
+			if(!possibilities[x].Answered)
+				break;
+
+			else if(counter == possibilities.Count - 1)
+				allAnswered = true;
+			counter++;
+		}
+			
+		
+
+
+		tempDebug = x;
 		string q = "";
 
-		Dictionary<string, List<int>> t;
-		questions.TryGetValue(x, out t);
-		foreach(string Key in t.Keys) {
-			q = Key;
+		currentQuestion = possibilities[x];
+		q = currentQuestion.Qquestion;
+
+		if (allAnswered) {
+			q = "You have answered all of the questions for this topic.";
 		}
-		
-		//Google2u.QuestionsRow a = db1.Rows [PickRandomID(x)];
-		currentQuestion = x;
-		//LoadFromXml ();
 		return q;
 	}
 
+	/*
 	public void WriteToXml(int answer)
 	{
 		
@@ -230,12 +253,20 @@ public class GameController : MonoBehaviour
 						pastAnswer = int.Parse(transformItens.InnerText); // convert the strings to float and apply to the X variable.
 						Debug.Log("Past answer: " + pastAnswer);
 					}
-
-					
 				}
 			}
-		}
-		
+        }
+	}
+*/
+
+	void folderTopics() {
+		TextMesh temp1 = folder1.GetComponentInChildren<TextMesh> ();
+		TextMesh temp2 = folder2.GetComponentInChildren<TextMesh> ();
+		TextMesh temp3 = folder3.GetComponentInChildren<TextMesh> ();
+
+		temp1.text = "Military";
+		temp2.text = "Medical";
+		temp3.text = "Social";
 	}
 		
 	void enableFPSCamera()

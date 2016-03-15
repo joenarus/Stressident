@@ -1,9 +1,13 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Basket.cs">
     <Files>
-      <File FileName="Assets/NewGameCont.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GameController.cs" Line="34" Column="16" />
+      <File FileName="Assets/Scripts/Basket.cs" Line="15" Column="19" />
+      <File FileName="Assets/Scripts/Question.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GameController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/HighlightOnHoverScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GameView.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/BasketBall.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

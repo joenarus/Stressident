@@ -16,8 +16,8 @@ public class GameView : MonoBehaviour
 	public Texture2D cursor;
 	public bool hitEscape = false;
 	public string currentTopic;
-
-
+	public GameObject BasketballCanvas;
+	public BasketBall activateBasket;
 
 	void Update () 
 	{
@@ -57,7 +57,8 @@ public class GameView : MonoBehaviour
 				}
 
 				if (hit.collider.gameObject.tag == "Basketball") {
-					Debug.Log("Yo");
+					BasketballCanvas.SetActive(true);
+					activateBasket.enabled = true;
 				}
 			}
 		}

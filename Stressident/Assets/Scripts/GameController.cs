@@ -9,7 +9,6 @@ using System.Linq;
 
 public class GameController : MonoBehaviour 
 {
-
 	public GameObject db;
 	public Google2u.Questions db1;
 	public GameObject QuestionCanvas;

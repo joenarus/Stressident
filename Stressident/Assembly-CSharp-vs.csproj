@@ -66,6 +66,7 @@
      <Compile Include="Assets\Scripts\GameView.cs" />
      <Compile Include="Assets\Scripts\HighlightOnHoverScript.cs" />
      <Compile Include="Assets\Scripts\Question.cs" />
+     <Compile Include="Assets\Scripts\Timer.cs" />
      <Compile Include="Assets\Scripts\TutorialController.cs" />
      <None Include="Assets\Data\questionsUsed.xml" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />

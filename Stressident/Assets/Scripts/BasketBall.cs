@@ -13,25 +13,24 @@ public class BasketBall : MonoBehaviour {
 	private int currentForce = 0;
 	public bool enabled = false;
 	public GameObject player;
-
-
+	public GameObject BasketballCanv;
+	private bool readyToShoot = false;
 	private int availableShots = 5;
 	
 	public Slider meter; //references to the force meter
 	private float arrowSpeed = 0.3f; //Difficulty, higher value = faster arrow movement
 	private bool up = true; //used to revers arrow movement
+	int counter = 0;
 
 	void Start()
 	{
-		if (enabled) {
-			/* Increase Gravity */
-			//Physics.gravity = new Vector3 (0, -20, 0);
-		}
+
 	}
 
 	void FixedUpdate()
 	{
 		if (enabled) {
+			counter++;
 			/* Move Meter Arrow */
 			if (up) {
 				currentForce ++;
@@ -47,13 +46,14 @@ public class BasketBall : MonoBehaviour {
 			}
 			meter.value = currentForce;
 
-			if(Input.GetButton("Fire1") && !thrown) {
 
+			if(Input.GetButton("Fire1") && !thrown && counter > 10 ) {
 				Vector3 theVector =  Input.mousePosition;
 				theVector.z = 1;
 				ballClone = Instantiate(ball, Camera.main.ScreenToWorldPoint(theVector),Quaternion.LookRotation(Camera.main.ScreenToWorldPoint(theVector))) as GameObject;
-				ballClone.GetComponent<Rigidbody>().AddForce(player.transform.forward * 10, ForceMode.Impulse);
+				ballClone.GetComponent<Rigidbody>().AddForce(player.transform.forward * currentForce, ForceMode.Impulse);
 				thrown = true;
+
 			}
 
 			if (ballClone != null && ballClone.transform.position.y < .2)
@@ -61,7 +61,16 @@ public class BasketBall : MonoBehaviour {
 				Destroy(ballClone);
 				thrown = false;
 				throwSpeed = new Vector3(0, 5, 5);
+				BasketballCanv.SetActive(false);
+				enabled = false;
+				currentForce = 0;
 			}
 		}
+
+	}
+	public void enable() {
+		BasketballCanv.SetActive (true);
+		enabled = true;
+		counter = 0;
 	}
 }

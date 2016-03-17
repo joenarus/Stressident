@@ -57,8 +57,8 @@ public class GameView : MonoBehaviour
 				}
 
 				if (hit.collider.gameObject.tag == "Basketball") {
-					BasketballCanvas.SetActive(true);
-					activateBasket.enabled = true;
+					//BasketballCanvas.SetActive(true);
+					activateBasket.enable();
 				}
 			}
 		}

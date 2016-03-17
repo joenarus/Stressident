@@ -27,10 +27,7 @@ public class GameController : MonoBehaviour
 	
 	public int tempDebug = 0;
 
-	double lastChange = 0.0;
-	int hour = 8;
-	int minutes = 0;
-	string ampm = "am";
+	public Timer time;
 
 
 	Dictionary<string, List<Question>> questions; 
@@ -74,7 +71,7 @@ public class GameController : MonoBehaviour
 	}
 
 	void OnGUI () {
-		GUILayout.Label(hour.ToString() + ":" + minutes.ToString() + "0" + ampm);
+		GUILayout.Label(time.hour.ToString() + ":" + time.minutes.ToString() + "0" + time.ampm);
 	}
 
 	// The game controller subscribes to these events from other classes
@@ -110,24 +107,6 @@ public class GameController : MonoBehaviour
 			Cursor.visible = true;
 			gameView.hitEscape = true;
 		}
-
-		if (Time.time - lastChange > 5.0) {
-			minutes++;
-			if(minutes == 6) {
-				minutes = 0;
-				hour++;
-				if(hour == 12) {
-					if(ampm == "am")
-						ampm = "pm";
-				}
-				if (hour == 24) {
-					hour = 8;
-					if(ampm == "pm")
-						ampm = "am";
-				}
-			}
-			lastChange = Time.time;
-		}
 	}
 
 	public void AnswerQuestion(int x) 
@@ -162,6 +141,8 @@ public class GameController : MonoBehaviour
 		Debug.Log (questions [currentQuestion.topic] [tempDebug].Answered);
 
 		QuestionCanvas.SetActive (false);
+		time.questionGoing = false; time.seconds = 15; //resets timer
+
 
 	}
 
@@ -171,6 +152,7 @@ public class GameController : MonoBehaviour
 		disableFPSCamera();
 		questionUp();
 		gameView.questionUp = true;
+		time.questionGoing = true;
 
 		List<Question> possibilities;
 		questions.TryGetValue (gameView.currentTopic, out possibilities);

@@ -28,6 +28,7 @@ public class GameController : MonoBehaviour
 	public int tempDebug = 0;
 
 	public Timer time;
+	public QuestionTimer questTime;
 
 
 	Dictionary<string, List<Question>> questions; 
@@ -138,8 +139,6 @@ public class GameController : MonoBehaviour
 
 		currentQuestion.AnsweredValue = x;
 
-		Debug.Log (questions [currentQuestion.topic] [tempDebug].Answered);
-
 		QuestionCanvas.SetActive (false);
 		time.questionGoing = false; time.seconds = 15; //resets timer
 
@@ -153,6 +152,7 @@ public class GameController : MonoBehaviour
 		questionUp();
 		gameView.questionUp = true;
 		time.questionGoing = true;
+		questTime.activate = true;
 
 		List<Question> possibilities;
 		questions.TryGetValue (gameView.currentTopic, out possibilities);
@@ -169,9 +169,6 @@ public class GameController : MonoBehaviour
 				allAnswered = true;
 			counter++;
 		}
-			
-		
-
 
 		tempDebug = x;
 		string q = "";

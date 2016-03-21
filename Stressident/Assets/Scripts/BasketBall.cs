@@ -44,8 +44,8 @@ public class BasketBall : MonoBehaviour {
 			if(currentForce == 0) {
 				up = true;
 			}
-			meter.value = currentForce;
 
+			meter.value = currentForce;
 
 			if(Input.GetButton("Fire1") && !thrown && counter > 10 ) {
 				Vector3 theVector =  Input.mousePosition;
@@ -66,11 +66,12 @@ public class BasketBall : MonoBehaviour {
 				currentForce = 0;
 			}
 		}
-
 	}
+
 	public void enable() {
 		BasketballCanv.SetActive (true);
 		enabled = true;
 		counter = 0;
+		up = true;
 	}
 }

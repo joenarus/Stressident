@@ -18,6 +18,8 @@ public class GameView : MonoBehaviour
 	public string currentTopic;
 	public GameObject BasketballCanvas;
 	public BasketBall activateBasket;
+	public QuestionTimer questTimer;
+	public GameController Controller;
 
 	void Update () 
 	{
@@ -50,6 +52,7 @@ public class GameView : MonoBehaviour
 						// Get the GUI to assign the question to
 						QuestionCanvas.SetActive (true);
 						QuestionCanvas.GetComponentInChildren<Text> ().text = question;
+
 
 						// Remove the folder game object
 						//Destroy (GameObject.Find (hit.collider.gameObject.name));

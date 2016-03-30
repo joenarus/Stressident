@@ -140,9 +140,10 @@ public class GameController : MonoBehaviour
 		currentQuestion.AnsweredValue = x;
 
 		QuestionCanvas.SetActive (false);
-		time.questionGoing = false; time.seconds = 15; //resets timer
 
-
+		time.questionGoing = false; 
+		questTime.activate = false;
+		questTime.reset (); //resets timer
 	}
 
 	string GetQuestion()

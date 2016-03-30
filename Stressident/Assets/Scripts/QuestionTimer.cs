@@ -4,18 +4,18 @@ using UnityEngine.UI;
 
 public class QuestionTimer : MonoBehaviour {
 
-	float timeLeft = 15.0f;
+	public float timeLeft = 15.0f;
 	public bool activate = false; 
 	public Text questionTimer;
-	public GameObject questionCanvas;
+	public GameController Controller;
 
 	void Update()
 	{
 		if (activate) {
 			timeLeft -= Time.deltaTime;
 			questionTimer.text = timeLeft.ToString();
-			if (timeLeft < 0) {
-				questionCanvas.SetActive(false);
+			if(timeLeft < 0) {
+				Controller.AnswerQuestion(2);
 			}
 		}
 	}

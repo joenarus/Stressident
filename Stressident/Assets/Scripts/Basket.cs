@@ -5,6 +5,8 @@ public class Basket : MonoBehaviour
 {
 	public GameObject score; //reference to the ScoreText gameobject, set in editor
 	public int tempScore = 0;
+	public Destress destressVal;
+	public int fatigue = 0;
 
 	void OnCollisionEnter() //if ball hits board
 	{
@@ -19,6 +21,9 @@ public class Basket : MonoBehaviour
 		}
 
 		score.GetComponent<Text> ().text = tempScore.ToString();
+
+		destressVal.SetDestressLevel (10 - fatigue);
+		fatigue++;
 		/*
 		int currentScore = int.Parse(score.GetComponent().text) + 1; //add 1 to the score
 		score.GetComponent().text = currentScore.ToString();

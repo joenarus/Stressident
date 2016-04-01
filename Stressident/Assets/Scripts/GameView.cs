@@ -63,6 +63,10 @@ public class GameView : MonoBehaviour
 					//BasketballCanvas.SetActive(true);
 					activateBasket.enable();
 				}
+
+				if (hit.collider.gameObject.tag == "Door") {
+					Debug.Log ("Eyyyy lmao");
+				}
 			}
 		}
 	}	

@@ -17,9 +17,13 @@ public class GameController : MonoBehaviour
 	public static event QuestionUp questionUp;
 	public delegate void QuestionDown();
 	public static event QuestionDown questionDown;
+	public Slider StressLevels;
+	public AudioSource heartbeat;
+
 	private Question currentQuestion;
 	private int pastAnswer;
 	private GameView gameView;
+	private bool heartbeatPlaying = false;
 
 	public GameObject folder1;
 	public GameObject folder2;
@@ -107,6 +111,22 @@ public class GameController : MonoBehaviour
 		{
 			Cursor.visible = true;
 			gameView.hitEscape = true;
+		}
+
+		// If stress levels too high, start blurry vision
+		if (StressLevels.value > 75) 
+		{
+			Camera.main.GetComponent<BlurryVision> ().stressed = true;
+			if (!heartbeatPlaying) 
+			{
+				heartbeat.Play();
+				heartbeatPlaying = true;
+			}
+		}
+		else if (heartbeatPlaying) 
+		{
+			heartbeat.Stop();
+			heartbeatPlaying = false;
 		}
 	}
 

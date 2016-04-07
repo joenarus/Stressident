@@ -16,7 +16,9 @@ public class BasketBall : MonoBehaviour {
 	public GameObject BasketballCanv;
 	private bool readyToShoot = false;
 	private int availableShots = 5;
-	
+
+	public GameController control;
+
 	public Slider meter; //references to the force meter
 	private float arrowSpeed = 0.3f; //Difficulty, higher value = faster arrow movement
 	private bool up = true; //used to revers arrow movement
@@ -64,6 +66,10 @@ public class BasketBall : MonoBehaviour {
 				BasketballCanv.SetActive(false);
 				enabled = false;
 				currentForce = 0;
+				if(control.Tutorial_Is_Going) {
+					control.StressLevels.value = 0;
+					control.tutorial.tutorial_active = true;
+				}
 			}
 		}
 	}

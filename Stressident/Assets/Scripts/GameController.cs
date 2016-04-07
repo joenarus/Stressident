@@ -33,7 +33,9 @@ public class GameController : MonoBehaviour
 
 	public Timer time;
 	public QuestionTimer questTime;
+	public TutorialController tutorial;
 
+	public bool Tutorial_Is_Going = true;
 
 	Dictionary<string, List<Question>> questions; 
 	List<string> topics;
@@ -45,10 +47,16 @@ public class GameController : MonoBehaviour
 			db = GameObject.Find ("Google2uDatabase");
 			db1 = db.GetComponent<Google2u.Questions>();
 		}
-
+		HashSet<string> temptopics = new HashSet<string>();
 		questions = new Dictionary<string, List<Question>>();
 		gameView = GetComponent<GameView>();
-
+		if (tutorial.tutorial_active) {
+			List<Question> y = new List<Question>();
+			Question temporary = new Question("This is a freebie, go ahead and click any of the answers.", "Tutorial", 10, 10, 10);
+			y.Add(temporary);
+			temptopics.Add(temporary.topic);
+			questions.Add(temporary.topic, y);
+		}
 		//Places questions into their respective topics.
 		for(int i = 0; i < 30; i++) {
 
@@ -60,7 +68,7 @@ public class GameController : MonoBehaviour
 			if(y == null) {
 				y = new List<Question>();
 			}
-			HashSet<string> temptopics = new HashSet<string>();
+
 			Question temporary = new Question(a._Name, a._Type, a._Yes, a._No, a._Maybe);
 			y.Add(temporary);
 
@@ -92,78 +100,112 @@ public class GameController : MonoBehaviour
 
 	void Update()
 	{
-		gameView.mousePosition = new Vector2(Screen.width/2, Screen.height/2);
-		Cursor.visible = false;
-		Cursor.lockState = CursorLockMode.None;
-
-		if (!gameView.questionUp) 
-		{
-			Cursor.lockState = CursorLockMode.Locked;
-
-		} 
-		else 
-		{
-			Cursor.lockState = CursorLockMode.None;
-			Cursor.visible = true;
-		}
-
-		if (Input.GetKeyDown (KeyCode.Escape)) 
-		{
-			Cursor.visible = true;
-			gameView.hitEscape = true;
-		}
-
-		// If stress levels too high, start blurry vision
-		if (StressLevels.value > 75) 
-		{
-			Camera.main.GetComponent<BlurryVision> ().stressed = true;
-			if (!heartbeatPlaying) 
-			{
-				heartbeat.Play();
-				heartbeatPlaying = true;
+		if (tutorial.tutorial_active) {
+			if(tutorial.counter == 0) {
+				disableFPSCamera();
 			}
 		}
-		else if (heartbeatPlaying) 
-		{
-			heartbeat.Stop();
-			heartbeatPlaying = false;
+		if (!tutorial.tutorial_active) {
+
+			gameView.mousePosition = new Vector2 (Screen.width / 2, Screen.height / 2);
+			Cursor.visible = false;
+			Cursor.lockState = CursorLockMode.None;
+
+			if (!gameView.questionUp) {
+				Cursor.lockState = CursorLockMode.Locked;
+
+			} else {
+				Cursor.lockState = CursorLockMode.None;
+				Cursor.visible = true;
+			}
+
+			if (Input.GetKeyDown (KeyCode.Escape)) {
+				Cursor.visible = true;
+				gameView.hitEscape = true;
+			}
+			if(tutorial.collided && tutorial.counter == 3) {
+				tutorial.tutorial_active = true;
+			}
+
+			// If stress levels too high, start blurry vision
+
 		}
+		if (StressLevels.value > 75) {
+			Camera.main.GetComponent<BlurryVision> ().stressed = true;
+			if (!heartbeatPlaying) {
+				heartbeat.Play ();
+				heartbeatPlaying = true;
+			}
+		} 
+		else if (heartbeatPlaying) {
+			heartbeat.Stop ();
+			heartbeatPlaying = false;
+			Camera.main.GetComponent<BlurryVision> ().stressed = false;
+		}
+		if (Input.GetKeyDown (KeyCode.P)) {
+				Debug.Log ("Pause");
+			}
 	}
 
 	public void AnswerQuestion(int x) 
 	{
-		// Enable FPS controller once question is answered
-		enableFPSCamera();
-		questionDown();
-		gameView.questionUp = false;
 
 		int i = currentQuestion.Yes;
 		int j = currentQuestion.No;
 		int k = currentQuestion.Hold;
-
-		//yes
-		if (x == 1) {
-			approval.value += i;
-			currentQuestion.Answered = true;
+		// Enable FPS controller once question is answered
+		enableFPSCamera();
+		questionDown();
+		gameView.questionUp = false;
+		bool allAnswered = false;
+		int counter = 0;
+		List<Question> possibilities;
+		questions.TryGetValue (gameView.currentTopic, out possibilities);
+		for(int d = 0; d < possibilities.Count; d++) {
+			if(!possibilities[d].Answered)
+				break;
+			
+			else if(counter == possibilities.Count - 1)
+				allAnswered = true;
+			counter++;
 		}
+		if (!allAnswered) {
+			i = currentQuestion.Yes;
+			j = currentQuestion.No;
+			k = currentQuestion.Hold;
+		} 
+		else {
+			i = 0;
+			j = 0;
+			k = 0;
+		}
+			//yes
+			if (x == 1) {
+				approval.value += i;
+				currentQuestion.Answered = true;
+			}
 		//hold
 		else if (x == 2) {
-			approval.value += k;
+				approval.value += k;
 
-		}
+			}
 		//no
 		else {
-			approval.value += j;
-			currentQuestion.Answered = true;
+				approval.value += j;
+				currentQuestion.Answered = true;
+			}
+
+			currentQuestion.AnsweredValue = x;
+
+			QuestionCanvas.SetActive (false);
+
+			time.questionGoing = false; 
+			questTime.activate = false;
+			questTime.reset (); //resets timer
+		if (currentQuestion.topic == "Tutorial") {
+			tutorial.tutorial_active = true;
 		}
 
-		currentQuestion.AnsweredValue = x;
-
-		QuestionCanvas.SetActive (false);
-
-		time.questionGoing = false; 
-		questTime.activate = false;
-		questTime.reset (); //resets timer
 	}
 
 	string GetQuestion()
@@ -203,77 +245,29 @@ public class GameController : MonoBehaviour
 		return q;
 	}
 
-	/*
-	public void WriteToXml(int answer)
-	{
-		
-		string filepath = Application.dataPath + @"/Data/questionsUsed.xml";
-		XmlDocument xmlDoc = new XmlDocument();
-		XmlElement elmRoot;
-		if (File.Exists (filepath)) {
-			xmlDoc.Load (filepath);
-			elmRoot = xmlDoc.DocumentElement;
-		
-			
-			//elmRoot.RemoveAll(); // remove all inside the transforms node.
-			
-			XmlElement elmNew = xmlDoc.CreateElement ("id"); // create the rotation node.
-			XmlElement answerX = xmlDoc.CreateElement ("answer");
-			elmNew.InnerText = currentQuestion.ToString ();
-			answerX.InnerText = answer.ToString ();
-
-			elmNew.AppendChild (answerX);
-			elmRoot.AppendChild (elmNew); // make the transform node the parent.
-			
-			xmlDoc.Save (filepath); // save file.
-		}
-
-	}
-
-	public void LoadFromXml()
-	{
-		string filepath = Application.dataPath + @"/Data/questionsUsed.xml";
-		XmlDocument xmlDoc = new XmlDocument();
-		
-		if(File.Exists (filepath))
-		{
-			xmlDoc.Load(filepath);
-			
-			XmlNodeList transformList = xmlDoc.GetElementsByTagName("id");
-			
-			foreach (XmlNode transformInfo in transformList)
-			{
-				XmlNodeList transformcontent = transformInfo.ChildNodes;
-				
-				foreach (XmlNode transformItens in transformcontent)
-				{
-					if(transformItens.Name == "answer")
-					{
-						pastAnswer = int.Parse(transformItens.InnerText); // convert the strings to float and apply to the X variable.
-						Debug.Log("Past answer: " + pastAnswer);
-					}
-				}
-			}
-        }
-	}
-*/
-
 	void folderTopics() {
 		TextMesh temp1 = folder1.GetComponentInChildren<TextMesh> ();
 		TextMesh temp2 = folder2.GetComponentInChildren<TextMesh> ();
 		TextMesh temp3 = folder3.GetComponentInChildren<TextMesh> ();
+		if (Tutorial_Is_Going) {
+			temp1.text = "Tutorial";
+			temp2.text = "Tutorial";
+			temp3.text = "Tutorial";
+		}
+		else {
+			temp1.text = "Military";
+			temp2.text = "Medical";
+			temp3.text = "Social";
+		}
 
-		temp1.text = "Military";
-		temp2.text = "Medical";
-		temp3.text = "Social";
 	}
 		
-	void enableFPSCamera()
+	public void enableFPSCamera()
 	{
 		GameObject.Find ("FPSController").GetComponent<FirstPersonController> ().enabled = true;	
 	}
 
-	void disableFPSCamera()
+	public void disableFPSCamera()
 	{
 		GameObject.Find ("FPSController").GetComponent<FirstPersonController> ().enabled = false;	
 	}

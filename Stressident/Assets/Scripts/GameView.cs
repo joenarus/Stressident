@@ -21,6 +21,7 @@ public class GameView : MonoBehaviour
 	public QuestionTimer questTimer;
 	public GameController Controller;
 
+
 	void Update () 
 	{
 		// If user clicks something ..
@@ -42,7 +43,7 @@ public class GameView : MonoBehaviour
 						GameObject parent = hit.collider.gameObject.transform.parent.gameObject;
 						TextMesh t = parent.GetComponentInChildren<TextMesh>();
 						currentTopic = t.text;
-
+						Debug.Log(currentTopic);
 
 						string question = "Did you know that if you're seeing this question then something went wrong?";
 
@@ -60,8 +61,13 @@ public class GameView : MonoBehaviour
 				}
 
 				if (hit.collider.gameObject.tag == "Basketball") {
-					//BasketballCanvas.SetActive(true);
-					activateBasket.enable();
+					if(Controller.Tutorial_Is_Going && Controller.tutorial.counter == 10) {
+						Controller.tutorial.tutorial_active = true;
+					}
+
+					else {
+						activateBasket.enable();
+					}
 				}
 
 				if (hit.collider.gameObject.tag == "Door") {

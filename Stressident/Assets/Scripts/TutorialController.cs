@@ -38,16 +38,17 @@ public class TutorialController : MonoBehaviour {
 				}
 
 				if (counter == 3) {
-
 					tutorial_text.text = "Click on the Tutorial Folder!";
 					Cursor.lockState = CursorLockMode.None;
 					Cursor.visible = true;
+
 				}
 
 				if (counter == 4) {
 					tutorial_active = false;
 					control.enableFPSCamera ();
 					counter++;
+					GameObject.Destroy(GameObject.Find("TutCollide"));
 				}
 
 				if (counter == 5) {
@@ -84,7 +85,7 @@ public class TutorialController : MonoBehaviour {
 					tutorial_text.text = "Finally, at the end of each day, you get to pick between a few actions that will impact your stress levels. When used multiple times, their effects on stress lessen, so choose carefully.";
 				}
 				if (counter == 13) {
-					tutorial_text.text = "That about sums everything up! You may pause the game at anytime by pressing P. Good luck on the job! ";
+					tutorial_text.text = "That about sums everything up! Good luck on the job! ";
 				}
 				if (counter == 14) {
 					tutorial_active = false;

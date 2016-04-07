@@ -37,6 +37,8 @@ public class GameController : MonoBehaviour
 
 	public bool Tutorial_Is_Going = true;
 
+	public GameObject DestressGUI;
+
 	Dictionary<string, List<Question>> questions; 
 	List<string> topics;
 
@@ -107,17 +109,27 @@ public class GameController : MonoBehaviour
 		}
 		if (!tutorial.tutorial_active) {
 
+			if(!gameView.GUIup) {
 			gameView.mousePosition = new Vector2 (Screen.width / 2, Screen.height / 2);
 			Cursor.visible = false;
 			Cursor.lockState = CursorLockMode.None;
+			}
 
-			if (!gameView.questionUp) {
-				Cursor.lockState = CursorLockMode.Locked;
-
-			} else {
+			if(gameView.GUIup) {
 				Cursor.lockState = CursorLockMode.None;
 				Cursor.visible = true;
 			}
+
+			else if (!gameView.questionUp) {
+				Cursor.lockState = CursorLockMode.Locked;
+
+			}
+		 
+			else {
+				Cursor.lockState = CursorLockMode.None;
+				Cursor.visible = true;
+			}
+
 
 			if (Input.GetKeyDown (KeyCode.Escape)) {
 				Cursor.visible = true;
@@ -145,6 +157,15 @@ public class GameController : MonoBehaviour
 		if (Input.GetKeyDown (KeyCode.P)) {
 				Debug.Log ("Pause");
 			}
+
+		if(!Tutorial_Is_Going) {
+			folderTopics();
+		}
+
+		if (time.hour == 18) {
+			EndDay();
+		}
+
 	}
 
 	public void AnswerQuestion(int x) 
@@ -174,7 +195,8 @@ public class GameController : MonoBehaviour
 			j = currentQuestion.No;
 			k = currentQuestion.Hold;
 		} 
-		else {
+		else if((Tutorial_Is_Going && tutorial.counter < 5) || allAnswered) {
+
 			i = 0;
 			j = 0;
 			k = 0;
@@ -187,7 +209,8 @@ public class GameController : MonoBehaviour
 		//hold
 		else if (x == 2) {
 				approval.value += k;
-
+				if(currentQuestion.topic == "Tutorial")
+				currentQuestion.Answered = true;
 			}
 		//no
 		else {
@@ -202,9 +225,10 @@ public class GameController : MonoBehaviour
 			time.questionGoing = false; 
 			questTime.activate = false;
 			questTime.reset (); //resets timer
-		if (currentQuestion.topic == "Tutorial") {
+		if (currentQuestion.topic == "Tutorial" && tutorial.counter == 5) {
 			tutorial.tutorial_active = true;
 		}
+
 
 	}
 
@@ -238,9 +262,10 @@ public class GameController : MonoBehaviour
 
 		currentQuestion = possibilities[x];
 		q = currentQuestion.Qquestion;
-
+		Question TempQuestion = currentQuestion;
 		if (allAnswered) {
-			q = "You have answered all of the questions for this topic.";
+			currentQuestion = new Question("You have answered all of the questions for this topic.", TempQuestion.topic, 0, 0, 0);
+
 		}
 		return q;
 	}
@@ -251,15 +276,47 @@ public class GameController : MonoBehaviour
 		TextMesh temp3 = folder3.GetComponentInChildren<TextMesh> ();
 		if (Tutorial_Is_Going) {
 			temp1.text = "Tutorial";
-			temp2.text = "Tutorial";
-			temp3.text = "Tutorial";
+			temp2.text = "Medical";
+			temp3.text = "Social";
 		}
 		else {
 			temp1.text = "Military";
 			temp2.text = "Medical";
 			temp3.text = "Social";
 		}
+	}
 
+	public void EndDay() {
+		DestressGUI.SetActive (true);
+		disableFPSCamera();
+	}
+
+	public void DestressDecision(int x) {
+		//Family
+		if (x == 0) {
+			StressLevels.value --;
+		}
+		//Alone
+		if (x == 1) {
+			StressLevels.value --;
+		}
+		//Friends
+		if (x == 2) {
+			StressLevels.value --;
+		}
+		//Other
+		if (x == 3) {
+			StressLevels.value --;
+		}
+
+		DestressGUI.SetActive (false);
+		gameView.GUIup = false;
+		enableFPSCamera ();
+		NextDay ();
+	}
+
+	void NextDay() {
+		//Fade to black, reset timer, new questions, etc.
 	}
 		
 	public void enableFPSCamera()

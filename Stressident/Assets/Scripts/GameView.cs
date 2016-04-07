@@ -20,7 +20,7 @@ public class GameView : MonoBehaviour
 	public BasketBall activateBasket;
 	public QuestionTimer questTimer;
 	public GameController Controller;
-
+	public bool GUIup = false;
 
 	void Update () 
 	{
@@ -43,7 +43,6 @@ public class GameView : MonoBehaviour
 						GameObject parent = hit.collider.gameObject.transform.parent.gameObject;
 						TextMesh t = parent.GetComponentInChildren<TextMesh>();
 						currentTopic = t.text;
-						Debug.Log(currentTopic);
 
 						string question = "Did you know that if you're seeing this question then something went wrong?";
 
@@ -71,7 +70,8 @@ public class GameView : MonoBehaviour
 				}
 
 				if (hit.collider.gameObject.tag == "Door") {
-					Debug.Log ("Eyyyy lmao");
+					Controller.EndDay();
+					GUIup = true;
 				}
 			}
 		}

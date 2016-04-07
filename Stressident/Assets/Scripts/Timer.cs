@@ -21,7 +21,7 @@ public class Timer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Time.time - lastChange > 5.0) {
+		if (Time.time - lastChange > 2.0) {
 			minutes++;
 			if(minutes == 6) {
 				minutes = 0;
@@ -38,13 +38,7 @@ public class Timer : MonoBehaviour {
 			}
 			lastChange = Time.time;
 		}
-		/* FIGURE THIS OUT LATER
-		if (questionGoing) {
-			if(Time.time - lastChange > 4.0)
-				seconds--;
-			timer.GetComponent<Text>().text = seconds.ToString();
-		}
-		*/
+	
 
 
 

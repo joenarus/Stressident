@@ -289,6 +289,7 @@ public class GameController : MonoBehaviour
 	public void EndDay() {
 		DestressGUI.SetActive (true);
 		disableFPSCamera();
+		gameView.GUIup = true;
 	}
 
 	public void DestressDecision(int x) {

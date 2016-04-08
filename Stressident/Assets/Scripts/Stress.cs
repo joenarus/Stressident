@@ -15,7 +15,7 @@ public class Stress : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		StressLevel = StressLevels.value;
+	//	StressLevel = StressLevels.value;
 
 		//StressLevels.value++;
 	}

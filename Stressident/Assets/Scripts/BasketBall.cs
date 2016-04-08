@@ -58,15 +58,15 @@ public class BasketBall : MonoBehaviour {
 
 			}
 
-			if (ballClone != null && ballClone.transform.position.y < .2)
+			if (ballClone != null)
 			{
-				Destroy(ballClone);
+				Destroy(ballClone, 3.0f);
 				thrown = false;
 				throwSpeed = new Vector3(0, 5, 5);
 				BasketballCanv.SetActive(false);
 				enabled = false;
 				currentForce = 0;
-				if(control.Tutorial_Is_Going) {
+				if(control.Tutorial_Is_Going && control.tutorial.counter == 11) {
 					control.StressLevels.value = 0;
 					control.tutorial.tutorial_active = true;
 				}
@@ -80,4 +80,6 @@ public class BasketBall : MonoBehaviour {
 		counter = 0;
 		up = true;
 	}
+
+
 }

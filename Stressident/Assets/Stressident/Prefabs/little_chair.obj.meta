@@ -7,11 +7,16 @@ ModelImporter:
   fileIDToRecycleName:
     100000: //RootNode
     100002: pCube18_pCube17SmoothProxyGroup
+    100004: polySurface2_polySurface1SmoothProxyGroup
     400000: //RootNode
     400002: pCube18_pCube17SmoothProxyGroup
+    400004: polySurface2_polySurface1SmoothProxyGroup
     2300000: pCube18_pCube17SmoothProxyGroup
+    2300002: polySurface2_polySurface1SmoothProxyGroup
     3300000: pCube18_pCube17SmoothProxyGroup
+    3300002: polySurface2_polySurface1SmoothProxyGroup
     4300000: pCube18_pCube17SmoothProxyGroup
+    4300002: polySurface2_polySurface1SmoothProxyGroup
   materials:
     importMaterials: 1
     materialName: 0

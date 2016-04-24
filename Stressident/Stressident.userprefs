@@ -1,14 +1,15 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GameController.cs">
     <Files>
-      <File FileName="Assets/Scripts/GameView.cs" Line="58" Column="66" />
-      <File FileName="Assets/Scripts/GameController.cs" Line="145" Column="14" />
-      <File FileName="Assets/Scripts/TutorialController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/BasketBall.cs" Line="69" Column="67" />
-      <File FileName="Assets/Scripts/Destress.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Timer.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Stress.cs" Line="18" Column="4" />
+      <File FileName="Assets\Scripts\BlurryVision.cs" Line="7" Column="42" />
+      <File FileName="Assets\Scripts\GameView.cs" Line="58" Column="14" />
+      <File FileName="Assets\Scripts\GameController.cs" Line="223" Column="5" />
+      <File FileName="Assets\Scripts\TutorialController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\BasketBall.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Destress.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Timer.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Stress.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

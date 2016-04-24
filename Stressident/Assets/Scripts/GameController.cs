@@ -43,6 +43,10 @@ public class GameController : MonoBehaviour
 	List<string> topics;
 
 	void Start() {
+
+		approval.value = -25;
+		StressLevels.value = 50;
+
 		folderTopics ();
 		List<string> topics = new List<string>();
 		if (db = null) {
@@ -139,9 +143,8 @@ public class GameController : MonoBehaviour
 				tutorial.tutorial_active = true;
 			}
 
-			// If stress levels too high, start blurry vision
-
 		}
+
 		if (StressLevels.value > 75) {
 			Camera.main.GetComponent<BlurryVision> ().stressed = true;
 			if (!heartbeatPlaying) {
@@ -204,17 +207,20 @@ public class GameController : MonoBehaviour
 			//yes
 			if (x == 1) {
 				approval.value += i;
+				StressLevels.value -= i;
 				currentQuestion.Answered = true;
 			}
 		//hold
 		else if (x == 2) {
 				approval.value += k;
+				StressLevels.value -= k;
 				if(currentQuestion.topic == "Tutorial")
 				currentQuestion.Answered = true;
 			}
 		//no
 		else {
 				approval.value += j;
+				StressLevels.value -= j;
 				currentQuestion.Answered = true;
 			}
 

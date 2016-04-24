@@ -4,7 +4,7 @@ using System.Collections;
 public class BlurryVision : MonoBehaviour 
 {
 	public bool stressed = false;
-	public static float timeBetweenBlurs = 3.0f;
+	public static float timeBetweenBlurs = 5.0f;
 
 	private static BlurryVision bv;
 

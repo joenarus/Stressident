@@ -4,7 +4,62 @@ timeCreated: 1461515146
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Clips_Pins:Clip02
+    100004: Clips_Pins:Cylinder001
+    100006: Clips_Pins:Cylinder002
+    100008: Clips_Pins:Cylinder003
+    100010: Clips_Pins:Line001
+    100012: Clips_Pins:Line002
+    100014: Clips_Pins:Line004
+    100016: Clips_Pins:Line005
+    100018: Clips_Pins:Plane003
+    100020: Clips_Pins:Plane004
+    100022: Clips_Pins:Plane005
+    100024: Clips_Pins:Plane006
+    100026: Clips_Pins:transform1
+    100028: Clips_Pins:transform2
+    100030: Clips_Pins:transform3
+    100032: Clips_Pins:transform4
+    100034: Clips_Pins:transform5
+    100036: Clips_Pins:transform6
+    100038: Clips_Pins:transform7
+    100040: Clips_Pins:transform8
+    400000: //RootNode
+    400002: Clips_Pins:Clip02
+    400004: Clips_Pins:Cylinder001
+    400006: Clips_Pins:Cylinder002
+    400008: Clips_Pins:Cylinder003
+    400010: Clips_Pins:Line001
+    400012: Clips_Pins:Line002
+    400014: Clips_Pins:Line004
+    400016: Clips_Pins:Line005
+    400018: Clips_Pins:Plane003
+    400020: Clips_Pins:Plane004
+    400022: Clips_Pins:Plane005
+    400024: Clips_Pins:Plane006
+    400026: Clips_Pins:transform1
+    400028: Clips_Pins:transform2
+    400030: Clips_Pins:transform3
+    400032: Clips_Pins:transform4
+    400034: Clips_Pins:transform5
+    400036: Clips_Pins:transform6
+    400038: Clips_Pins:transform7
+    400040: Clips_Pins:transform8
+    2300000: Clips_Pins:Clip02
+    2300002: Clips_Pins:Cylinder003
+    2300004: Clips_Pins:Line005
+    2300006: Clips_Pins:Plane006
+    3300000: Clips_Pins:Clip02
+    3300002: Clips_Pins:Cylinder003
+    3300004: Clips_Pins:Line005
+    3300006: Clips_Pins:Plane006
+    4300000: Clips_Pins:Clip02
+    4300002: Clips_Pins:Cylinder003
+    4300004: Clips_Pins:Line005
+    4300006: Clips_Pins:Plane006
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0

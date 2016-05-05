@@ -120,11 +120,11 @@ namespace Google2u
 	{
 		public enum rowIds {
 			ID_Q1, ID_Q2, ID_Q3, ID_Q4, ID_Q5, ID_Q6, ID_Q7, ID_Q8, ID_Q9, ID_Q10, ID_Q11, ID_Q12, ID_Q13, ID_Q14, ID_Q15, ID_Q16, ID_Q17, ID_Q18
-			, ID_Q19, ID_Q20, ID_Q21, ID_Q22, ID_Q23, ID_Q24, ID_Q25, ID_Q26, ID_Q27, ID_Q28, ID_Q29, ID_Q30
+			, ID_Q19, ID_Q20, ID_Q21, ID_Q22, ID_Q23, ID_Q24, ID_Q25, ID_Q26, ID_Q27, ID_Q28, ID_Q29, ID_Q30, ID_Q31, ID_Q32, ID_Q33, ID_Q34
 		};
 		public string [] rowNames = {
 			"ID_Q1", "ID_Q2", "ID_Q3", "ID_Q4", "ID_Q5", "ID_Q6", "ID_Q7", "ID_Q8", "ID_Q9", "ID_Q10", "ID_Q11", "ID_Q12", "ID_Q13", "ID_Q14", "ID_Q15", "ID_Q16", "ID_Q17", "ID_Q18"
-			, "ID_Q19", "ID_Q20", "ID_Q21", "ID_Q22", "ID_Q23", "ID_Q24", "ID_Q25", "ID_Q26", "ID_Q27", "ID_Q28", "ID_Q29", "ID_Q30"
+			, "ID_Q19", "ID_Q20", "ID_Q21", "ID_Q22", "ID_Q23", "ID_Q24", "ID_Q25", "ID_Q26", "ID_Q27", "ID_Q28", "ID_Q29", "ID_Q30", "ID_Q31", "ID_Q32", "ID_Q33", "ID_Q34"
 		};
 		public System.Collections.Generic.List<QuestionsRow> Rows = new System.Collections.Generic.List<QuestionsRow>();
 		public override void AddRowGeneric (System.Collections.Generic.List<string> input)

@@ -18,7 +18,7 @@ public class Destress : MonoBehaviour {
 	void Update () {
 		if (clock.hour == 9) { //checks time and displays options to destress.
 			//DestressGUI.SetActive(true);
-			Debug.Log ("Sweet");
+			//Debug.Log ("Sweet");
 		}
 
 

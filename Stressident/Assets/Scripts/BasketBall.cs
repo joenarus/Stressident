@@ -48,7 +48,7 @@ public class BasketBall : MonoBehaviour {
 			}
 
 			meter.value = currentForce;
-
+			Debug.Log (control.tutorial.counter);
 			if(Input.GetButton("Fire1") && !thrown && counter > 10 ) {
 				Vector3 theVector =  Input.mousePosition;
 				theVector.z = 1;
@@ -66,7 +66,7 @@ public class BasketBall : MonoBehaviour {
 				BasketballCanv.SetActive(false);
 				enabled = false;
 				currentForce = 0;
-				if(control.Tutorial_Is_Going && control.tutorial.counter == 11) {
+				if(control.Tutorial_Is_Going && control.tutorial.counter == 12) {
 					control.StressLevels.value = 0;
 					control.tutorial.tutorial_active = true;
 				}

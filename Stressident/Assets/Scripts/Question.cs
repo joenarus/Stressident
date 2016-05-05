@@ -24,6 +24,8 @@ public class Question {
 		get {
 			return qquestion;
 		}
+		set { qquestion = value;
+		}
 	}
 	public int Yes {
 		get {
